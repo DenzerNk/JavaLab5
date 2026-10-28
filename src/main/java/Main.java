@@ -21,14 +21,18 @@ public class Main {
                         System.out.print("Назва: ");
                         String name = scanner.nextLine();
                         // Підказка для введення Enum
-                        System.out.print("Розмір (S, M, L, XL, XXL): "); 
-                        // Перетворюємо введений текст на Enum. Якщо такого немає - викинеться помилка
+                        System.out.print("Розмір (S, M, L, XL, XXL): ");
                         Size size = Size.valueOf(scanner.nextLine().trim().toUpperCase()); 
                         System.out.print("Ціна: ");
                         double price = Double.parseDouble(scanner.nextLine());
                         System.out.print("Колір: ");
                         String color = scanner.nextLine();
-                        Clothes newClothes = new Clothes(name, size, price, color);
+                        System.out.print("Назва бренду: ");
+                        String brandName = scanner.nextLine();
+                        System.out.print("Країна бренду: ");
+                        String brandCountry = scanner.nextLine();
+                        Brand brand = new Brand(brandName, brandCountry);
+                        Clothes newClothes = new Clothes(name, size, price, color, brand);
                         wardrobe.add(newClothes);
                         System.out.println("Об'єкт успішно створено та додано");
                     } catch (NumberFormatException e) {

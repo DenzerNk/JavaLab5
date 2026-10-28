@@ -2,13 +2,15 @@ public class Clothes {
     private String name;
     private Size size;
     private double price;
-    private String color; // Додано 4 атрибута
+    private String color;
+    private Brand brand; // Додано 4 атрибута
     private static int objectCount = 0;
-    public Clothes(String name, Size size, double price, String color) {
+    public Clothes(String name, Size size, double price, String color, Brand brand) {
         setName(name);
         setSize(size);
         setPrice(price);
         setColor(color);
+        setBrand(brand);
         objectCount++;
     }
     public Clothes(Clothes other) {
@@ -19,6 +21,7 @@ public class Clothes {
         this.size = other.size;
         this.price = other.price;
         this.color = other.color;
+        this.brand = new Brand(other.brand.getName(), other.brand.getCountry());
         objectCount++;
     }
     public static int getObjectCount() {
@@ -52,8 +55,15 @@ public class Clothes {
         }
         this.color = color;
     }
+    public Brand getBrand() { return brand; }
+public void setBrand(Brand brand) {
+    if (brand == null) {
+        throw new IllegalArgumentException("Бренд не може бути null.");
+    }
+    this.brand = brand;
+}
     public String toString() {
-        return "Clothes [name=" + name + ", size=" + size + ", price=" + price + ", color=" + color + "]";
+        return "Clothes [name=" + name + ", size=" + size + ", price=" + price + ", color=" + color + ", brand=" + brand.toString() + "]";
     }
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -62,6 +72,7 @@ public class Clothes {
         if (Double.compare(clothes.price, price) != 0) return false;
         if (!name.equals(clothes.name)) return false;
         if (size != clothes.size) return false;
-        return color.equals(clothes.color);
+        if (!color.equals(clothes.color)) return false;
+        return brand.getName().equals(clothes.brand.getName()) && brand.getCountry().equals(clothes.brand.getCountry());
     }
 }
